@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LuckyController!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+	{% if files %}
+		<ul>
+			{% for file in files %}
+				<li>{{ file }}</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+</div>
+
+{% endblock %}

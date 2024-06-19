@@ -11,17 +11,21 @@ use Symfony\Component\Routing\Attribute\Route;
 class ExampleController extends AbstractController
 {
     #[Route('/finder', name: 'app_finder')]
-    public function finder(): JsonResponse
+    public function finder(): Response
 	{
 		$finder = new Finder();
 		$finder->files()->in(__DIR__ . '/..')
 			->name('*.php');
 
+		$files = [];
+
 		foreach ($finder as $file) {
-			echo $file->getFilename() . "\n";
+			$files[] = $file->getFilename();
 		}
 
-		return new JsonResponse(null, Response::HTTP_OK);
+		return $this->render('example/index.html.twig', [
+			'files' => $files,
+		]);
     }
 
     #[Route('/dump', name: 'app_dump')]
