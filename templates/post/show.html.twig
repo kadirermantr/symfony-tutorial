@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post Detail{% endblock %}
+
+{% block body %}
+
+	<div class="example-wrapper">
+		<h2 class="mb-3">Post Detail</h2>
+
+		<ul>
+			<li>ID: {{ post.id }}</li>
+			<li>TITLE: {{ post.title }}</li>
+		</ul>
+	</div>
+
+{% endblock %}
