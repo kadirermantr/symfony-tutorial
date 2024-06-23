@@ -10,6 +10,7 @@
 		<ul>
 			<li>ID: {{ post.id }}</li>
 			<li>TITLE: {{ post.title }}</li>
+			<li>CATEGORY: {{ post.category ?? '-' }}</li>
 		</ul>
 
 		{% if post.image %}
