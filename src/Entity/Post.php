@@ -14,9 +14,12 @@ class Post
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-	#[NotBlank]
-    private ?string $title = null;
+	#[ORM\Column(length: 255)]
+      	#[NotBlank]
+      	private ?string $title = null;
+
+	#[ORM\Column(type: "string", length: 100)]
+      	private ?string $image = null;
 
     public function getId(): ?int
     {
@@ -31,6 +34,18 @@ class Post
     public function setTitle(string $title): static
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

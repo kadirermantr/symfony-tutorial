@@ -11,6 +11,10 @@
 			<li>ID: {{ post.id }}</li>
 			<li>TITLE: {{ post.title }}</li>
 		</ul>
+
+		{% if post.image %}
+			<img src="{{ '/uploads/' ~ post.image }}" width="250" alt="post">
+		{% endif %}
 	</div>
 
 {% endblock %}
