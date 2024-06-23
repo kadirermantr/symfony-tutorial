@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Services\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -43,7 +44,7 @@ class PostController extends AbstractController
 	}
 
 	#[Route('/create', name: 'create')]
-	public function create(Request $request): Response
+	public function create(Request $request, FileUploader $fileUploader): Response
 	{
 		$post = new Post();
 
@@ -57,9 +58,7 @@ class PostController extends AbstractController
 			$file = $form->get('attachment')->getData();
 
 			if ($file) {
-				$fileName = sprintf('%s.%s', md5(uniqid()), $file->guessClientExtension());
-
-				$file->move($this->getParameter('uploads_dir'), $fileName);
+				$fileName = $fileUploader->uploadFile($file);
 				$post->setImage($fileName);
 			}
 
