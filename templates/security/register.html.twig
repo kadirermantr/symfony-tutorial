@@ -7,6 +7,12 @@
 	<div class="example-wrapper col-sm-3 mx-auto">
 		<h2 class="mb-3">Register</h2>
 
+		{% for message in app.flashes('error') %}
+			<div class="alert alert-danger">
+				{{ message }}
+			</div>
+		{% endfor %}
+
 		{{ form(form) }}
 	</div>
 

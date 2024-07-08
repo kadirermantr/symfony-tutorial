@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserRegisterType;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,8 +38,18 @@ class RegistrationController extends AbstractController
 			$user->setUsername($data->getUsername());
 			$user->setPassword($hasher->hashPassword($user, $data->getPassword()));
 
-			$this->entityManager->persist($user);
-			$this->entityManager->flush();
+            try {
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+            } catch (Exception $e) {
+                if (str_contains($e->getMessage(), 'Duplicate entry')) {
+                    $this->addFlash('error', 'Username already exists');
+                } else {
+                    $this->addFlash('error', 'An error occurred');
+                }
+
+                return $this->redirectToRoute('app_register');
+            }
 
 			return $this->redirect($this->generateUrl('app_login'));
 		}
