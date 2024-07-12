@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AI{% endblock %}
+
+{% block body %}
+
+    <div class="example-wrapper">
+        <h2 class="mb-3">AI</h2>
+
+        {{ form(form) }}
+
+    {% if response %}
+        <div class="pt-5">
+            <i>{{ response }}</i>
+        </div>
+    {% endif %}
+    </div>
+
+{% endblock %}
